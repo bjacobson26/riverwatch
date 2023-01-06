@@ -1,0 +1,102 @@
+body {
+  font-family: 'Courier New', Courier, monospace;
+  background-color: #1F2227;
+  color: white;
+  padding: 16px;
+  color: gainsboro
+}
+
+img {
+  border-radius: 10px;
+}
+
+h1 {
+  padding: 0;
+  margin: 0;
+}
+
+h2 {
+  font-size: 20px;
+}
+
+p {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+small {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+a {
+  font-size: 16px;
+  color: rgb(59, 130, 246);
+}
+
+.graphImage {
+  width: 100%;
+  display: block;
+  margin: auto;
+  border-radius: 10px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 1028px) {
+  .grid-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.title {
+  color: rgb(59, 130, 246);
+}
+
+.card {
+  padding: 10px;
+  background-color: rgb(39, 43, 50);;
+  margin-right: 10px;
+  margin-top: 10px;
+  border-radius: 10px;
+}
+
+.weather {
+  display: flex;
+  gap: 5%;
+}
+
+#rainGraph {
+  margin-top: 10px;
+  border-radius: 10px;
+}
+
+
+@import 'https://code.highcharts.com/css/highcharts.css';
+
+.highcharts-background {
+    fill: rgb(39, 43, 50);;;
+}
+.highcharts-container text {
+    fill: white
+}
+.highcharts-title,
+.highcharts-subtitle,
+.highcharts-credits,
+.highcharts-axis-title {
+  color: white;
+  fill: white;
+}
+.highcharts-grid-line {
+    stroke: var(--text-color);
+    stroke-opacity: 0.2;
+}
+.highcharts-tooltip-box {
+    fill: var(--background-color);
+}
+.highcharts-column-series rect.highcharts-point {
+    stroke: var(--background-color);
+}
