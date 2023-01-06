@@ -180,6 +180,10 @@ async function createDataCard(id, data) {
 
   el.innerHTML = `
     <h1>${data.name}</h1>
+    <div class="flex-with-gap">
+      <p class="action-stage">Action Stage: ${data.actionThreshold}ft</p>
+      <p class="flood-stage">Flood Stage: ${data.floodThreshold}ft</p>
+    </div>
     <h2>STATUS: <span style="color: ${data.color}">${data.status.toUpperCase()}</span><h2>
     <p>Level was <b>${data.currentLevel}ft</b> ${data.lastCheckedAt} and trending <b>${data.trend}</b>.</p>
     <small><i>(${data.previousLevel}ft ${data.previousLevelCheckedAt})</i></small>
