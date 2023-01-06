@@ -261,6 +261,17 @@ async function buildRainGraph() {
   });
 }
 
-setLagoonData()
-setHighwayData()
-setWeatherData()
+function initializePage() {
+  setLagoonData()
+  setHighwayData()
+  setWeatherData()
+  const updatedAt = new Date().toLocaleTimeString()
+  document.getElementById('updated_at').innerHTML = `Last updated ${updatedAt}`
+}
+
+initializePage()
+
+setInterval(() => {
+  initializePage()
+}, 60000)
+
