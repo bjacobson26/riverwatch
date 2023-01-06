@@ -191,7 +191,7 @@ async function createDataCard(id, data) {
 }
 
 async function setWeatherData() {
-  const url = "https://api.open-meteo.com/v1/forecast?latitude=36.54&longitude=-121.92&current_weather=true&hourly=precipitation&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&timezone=America%2FLos_Angeles";
+  const url = "https://api.open-meteo.com/v1/forecast?latitude=36.54&longitude=-121.92&current_weather=true&hourly=precipitation&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&timeformat=unixtime";
   const resp = await fetch(url);
   const parsed = await resp.json();
   this.currentWeather = parsed['current_weather'];
@@ -207,17 +207,35 @@ async function setWeatherData() {
 
   this.rainGraphData = [];
   parsed['hourly']['time'].forEach((time, index) => {
-    const convertedTime = new Date(Date.parse(time)).getTime()
-    this.rainGraphData.push([convertedTime, parsed['hourly']['precipitation'][index]]);
+    this.rainGraphData.push([time * 1000, parsed['hourly']['precipitation'][index]]);
   });
   buildRainGraph()
 }
 
 async function buildRainGraph() {
+  var now = new Date();
+
+  Highcharts.setOptions({
+    time: {
+        timezoneOffset: 8 * 60
+    }
+  });
+
   Highcharts.chart('rainGraph', {
     tooltip: {
       style: {
         color: "#FFFFFF"
+      },
+      formatter: function() {
+        var d = new Date(this.x);
+        var hours = d.getHours();
+        var minutes = d.getMinutes();
+        var ampm = hours >= 12 ? 'pm' : 'am';
+        hours = hours % 12;
+        hours = hours ? hours : 12; // the hour '0' should be '12'
+        minutes = minutes < 10 ? '0' + minutes : minutes;
+        var strTime = hours + ':' + minutes + ' ' + ampm;
+        return 'Date: ' + new Date(this.x).toDateString() + '<br>Time: ' + strTime + '<br>Value: ' + this.y;
       }
     },
     legend: { enabled: false },
@@ -225,16 +243,22 @@ async function buildRainGraph() {
     title: { text: "" },
     xAxis: {
       type: "datetime",
-      dateTimeLabelFormats: { day: '%b %e' }
+      labels: {
+        format: "{value:%b %e}"
+      },
+      plotLines: [{
+        color: 'white',
+        width: 1,
+        value: now.getTime(),
+        zIndex: 5
+      }]
     },
     yAxis: { title: { text: "inches" } },
     series: [{
       name: "Rain",
       data: this.rainGraphData
     }]
-
-});
-
+  });
 }
 
 setLagoonData()
