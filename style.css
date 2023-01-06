@@ -38,6 +38,7 @@ a {
   width: 100%;
   display: block;
   margin: auto;
+  margin-top: 10px;
   border-radius: 10px;
 }
 
@@ -83,7 +84,6 @@ a {
 .highcharts-container text {
     fill: white
 }
-.highcharts-title,
 .highcharts-subtitle,
 .highcharts-credits,
 .highcharts-axis-title {

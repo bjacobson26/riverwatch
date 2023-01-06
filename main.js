@@ -185,7 +185,7 @@ async function createDataCard(id, data) {
     <small><i>(${data.previousLevel}ft ${data.previousLevelCheckedAt})</i></small>
     <br>
     <a href="${data.linkUrl}">More info</a>
-    <br>
+
     <img src="${data.graphUrl}" class="graphImage" />
   `
 }
